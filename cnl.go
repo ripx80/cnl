@@ -3,25 +3,14 @@ package main
 import (
     "fmt"
     "net/http"
-    //"reflect"
-    "net/http/httputil"
-    //"encoding/base64"
-    //"crypto/aes"
-    //"crypto/cipher"
-    //"strings"
-    
+    "net/http/httputil"    
 )
 
 var Debug = 0
 
-
-
-
 func handler(w http.ResponseWriter, r *http.Request){
-    if r.Method == "POST" {
-        //fmt.Println("Receive a POST Request")     
-        r.ParseForm()
-        
+    if r.Method == "POST" {       
+        r.ParseForm()        
         //debug 
         if(Debug == 1){
             requestDump, err := httputil.DumpRequest(r, true)
@@ -29,9 +18,7 @@ func handler(w http.ResponseWriter, r *http.Request){
               fmt.Println(err)
             }
             fmt.Println(string(requestDump))
-       }
-        
-        
+       }        
     }else if r.Method == "GET" {
         //fmt.Println("Receive a GET Request")
     }
@@ -50,8 +37,7 @@ func handler(w http.ResponseWriter, r *http.Request){
         w.WriteHeader(200)
     }else{
         fmt.Println("Unsupported path")
-        w.WriteHeader(404)
-        
+        w.WriteHeader(404)        
     }
     fmt.Fprintf(w, rep)      
 }
@@ -74,6 +60,7 @@ func add(r *http.Request){
     fmt.Printf("passwords:%+v\n",passwords)
 }
 
+// not implemented jet ;-) kept this func for later commits
 func addcrypted2(r *http.Request){
     
     source := r.FormValue("source")

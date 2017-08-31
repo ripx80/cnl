@@ -7,11 +7,8 @@ import os
 import http.server
 import socketserver
 import re
-
 import logging
 from urllib.parse import parse_qs
-
-
 
 port = 9666
 addr = "127.0.0.1"
@@ -27,11 +24,10 @@ logger.addHandler(cn_log)
 
 class ClickHandler(http.server.BaseHTTPRequestHandler):
         
-    def __init__(self, request, client_address, server):
-        
-        super().__init__(request, client_address, server)       
+    def __init__(self, request, client_address, server):        
+        super().__init__(request, client_address, server)           
     
-    
+    # not all implemented jet.. kept this funcs for later commits
     def do_GET(self):
         path = self.path.strip("/").lower()
         self.map = [         
@@ -64,8 +60,7 @@ class ClickHandler(http.server.BaseHTTPRequestHandler):
             return
 
         self.post = parse_qs(self.rfile.read(length).decode('utf-8'))       
-        self.do_GET()
-    
+        self.do_GET()    
     
     def log_message(self, format, *args):
         # silent mode ;-)
@@ -109,8 +104,7 @@ class ClickHandler(http.server.BaseHTTPRequestHandler):
             
     def addcrypted2(self):
         logger.warning("Not supported yet")
-        self.success()
-     
+        self.success()     
             
     def flash(self):
         self.response("JDownloader\r\n") 
@@ -118,13 +112,10 @@ class ClickHandler(http.server.BaseHTTPRequestHandler):
     def jdcheck(self):
         self.response("jdownloader=true;\nvar version='10629';\n\r\n") 
 
-
-
 if __name__ == "__main__":
     socketserver.TCPServer.allow_reuse_address = True
     with socketserver.TCPServer((addr, port), ClickHandler) as httpd:
-        print("serving at port", port)
-    
+        print("serving at port", port)    
         try:
             httpd.serve_forever()
         except KeyboardInterrupt:
