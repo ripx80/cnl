@@ -1,17 +1,14 @@
 # CNL
 Click and Load standalone command line tool written in go and python.
 
-== Start the local webserver ==
+## Start the local webserver
 
-using python
 $ python cnl.py
-
-
-using go
+or
 $ go run cnl.go
 
 
-== Test Post Request ==
+## Test Post Request
 
 go run post-req.go
 
